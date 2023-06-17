@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.imgur.ui.theme.ImgurTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,7 +48,7 @@ fun Screen() {
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
     ) {
-        val openDialog = remember { mutableStateOf(true) }
+        val openDialog = remember { mutableStateOf(false) }
         val textState = remember {
             mutableStateOf("Android")
         }
@@ -65,6 +66,10 @@ fun Screen() {
         ) {
             Text("change")
         }
+        AsyncImage(
+            model = "https://i.imgur.com/hkiVfFG.jpg",
+            contentDescription = null,
+        )
         Dialog(openDialog = openDialog)
     }
 }
