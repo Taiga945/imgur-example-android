@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Imgur"
 include(":app")
+include(":lib-network")
+include(":lib-network-api")
