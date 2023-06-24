@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.imgur.ui.theme.ImgurTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +43,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 @Composable
-fun Screen() {
+fun Screen(
+    viewModel: HomeViewModel = viewModel()
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()

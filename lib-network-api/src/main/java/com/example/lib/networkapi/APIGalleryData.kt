@@ -72,5 +72,5 @@ data class APIGalleryData(
     @SerializedName("include_album_ads")
     val includeAlbumAds: Boolean?,
     @SerializedName("images")
-    val images: List<APIImage>
+    val images: List<APIImage>?
 )
