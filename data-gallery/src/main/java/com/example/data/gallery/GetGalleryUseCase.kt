@@ -7,10 +7,11 @@ class GetGalleryUseCase {
         val response = ImgurRepository().getGallery()
 
         val images = response.data.mapNotNull { dataItem ->
-            dataItem.images?.getOrNull(0)?.link?.takeIf {
-                it.endsWith(".jpg") || it.endsWith(".png")
-            }
+            dataItem.images?.getOrNull(0)?.link
+                ?.takeIf { it.endsWith(".jpg") || it.endsWith(".png") }
+                ?.let { GalleryPage(it, dataItem.title ?: "Obrazek") }
         }
+
 
         return GalleryResponse(images)
     }

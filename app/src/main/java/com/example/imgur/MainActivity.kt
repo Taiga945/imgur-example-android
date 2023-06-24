@@ -80,8 +80,9 @@ fun Screen(
             Text("change")
         }
         imagesState.value?.images?.forEach { image ->
+            Text(text = image.title)
             AsyncImage(
-                model = image,
+                model = image.imageLink,
                 contentDescription = null,
             )
         }

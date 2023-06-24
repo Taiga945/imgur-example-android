@@ -1,5 +1,5 @@
 package com.example.data.gallery
 
 data class GalleryResponse(
-    val images: List<String>
+    val images: List<GalleryPage>
 )
