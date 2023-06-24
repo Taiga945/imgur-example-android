@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Button
@@ -20,16 +22,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.imgur.ui.theme.ImgurTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +46,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun Screen(
     viewModel: HomeViewModel = viewModel()
 ) {
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.initData()
+    })
+    val imagesState = viewModel.state.collectAsState()
     Column(
         modifier = Modifier
+            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
     ) {
@@ -69,10 +79,12 @@ fun Screen(
         ) {
             Text("change")
         }
-        AsyncImage(
-            model = "https://i.imgur.com/hkiVfFG.jpg",
-            contentDescription = null,
-        )
+        imagesState.value?.images?.forEach { image ->
+            AsyncImage(
+                model = image,
+                contentDescription = null,
+            )
+        }
         Dialog(openDialog = openDialog)
     }
 }

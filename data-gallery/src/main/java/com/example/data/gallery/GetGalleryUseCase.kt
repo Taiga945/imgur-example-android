@@ -3,7 +3,7 @@ package com.example.data.gallery
 import com.example.lib.network.ImgurRepository
 
 class GetGalleryUseCase {
-    suspend fun sendRequest(): GalleryResponse {
+    suspend fun getImages(): GalleryResponse {
         val response = ImgurRepository().getGallery()
 
         val images = response.data.mapNotNull { dataItem ->

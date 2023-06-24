@@ -6,7 +6,7 @@ import org.junit.Test
 class GetGalleryUseCaseIT {
     @Test
     fun getGallery() {
-        val result = runBlocking { GetGalleryUseCase().sendRequest() }
+        val result = runBlocking { GetGalleryUseCase().getImages() }
         assert(result.images.isNotEmpty())
     }
 }
