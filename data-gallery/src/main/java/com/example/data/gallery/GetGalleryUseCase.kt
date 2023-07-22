@@ -9,9 +9,8 @@ class GetGalleryUseCase {
         val images = response.data.mapNotNull { dataItem ->
             dataItem.images?.getOrNull(0)?.link
                 ?.takeIf { it.endsWith(".jpg") || it.endsWith(".png") }
-                ?.let { GalleryPage(it, dataItem.title ?: "Obrazek") }
+                ?.let { GalleryPage(it, dataItem.title ?: "Obrazek", dataItem.id, dataItem.description ?: "Opis")}
         }
-
 
         return GalleryResponse(images)
     }
